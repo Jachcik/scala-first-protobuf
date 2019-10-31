@@ -1,6 +1,7 @@
 package pl.shumikowo.s1pb
 
 import java.nio.ByteBuffer
+import java.time.{LocalDateTime, ZoneOffset}
 
 import cats.implicits._
 import cats.kernel.Eq
@@ -30,6 +31,13 @@ class CompatibilityTest extends Specification with BeforeEach with AfterAll {
     test(
       m.SimpleTypes(42, 1234567, "test"),
       g.SimpleTypes(42, 1234567, "test")
+    )
+  }
+
+  "Product of time units" should {
+    test(
+      m.TimeTypes(LocalDateTime.ofEpochSecond(42,42,ZoneOffset.MAX)),
+      g.TimeTypes(LocalDateTime.ofEpochSecond(42,42,ZoneOffset.MAX).toString)
     )
   }
 

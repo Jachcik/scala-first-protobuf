@@ -7,6 +7,7 @@ class GenerateProtoDefinitions extends Spec {
 
   "ProtoRenderer" should {
     saveProtoDefinition[SimpleTypes]("SimpleTypes")
+    saveProtoDefinition[TimeTypes]("TimeTypes")
     saveProtoDefinition[NestedProducts]("NestedProducts")
     saveProtoDefinition[WithValueType]("WithValueType")
     saveProtoDefinition[WithSequence]("WithSequence")

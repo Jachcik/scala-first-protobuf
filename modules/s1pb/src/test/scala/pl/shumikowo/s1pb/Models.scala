@@ -1,8 +1,12 @@
 package pl.shumikowo.s1pb
 
+import java.time.LocalDateTime
+
 object Models {
 
   case class SimpleTypes(i: Int, l: Long, s: String)
+
+  case class TimeTypes(javaLocalDateTime: LocalDateTime)
 
   case class NestedProducts(p1: InnerNestedProducts, p2: InnerNestedProducts)
   case class InnerNestedProducts(p1: BottomNestedProduct, p2: BottomNestedProduct)

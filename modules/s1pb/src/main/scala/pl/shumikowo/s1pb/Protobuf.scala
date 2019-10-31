@@ -1,7 +1,7 @@
 package pl.shumikowo.s1pb
 
 import java.nio.charset.StandardCharsets
-import java.time.Instant
+import java.time.{Instant, LocalDateTime}
 
 import com.google.protobuf.{CodedInputStream, WireFormat}
 import magnolia._
@@ -108,6 +108,13 @@ object Protobuf {
     override def protobufType: ProtobufType = "int64"
     override def write(out: Output, value: Instant): Unit = out.writeInt64NoTag(value.toEpochMilli)
     override def read(in: CodedInputStream): Instant = Instant.ofEpochMilli(in.readInt64())
+  }
+
+  implicit object ProtobufLocalDateTime extends Protobuf[LocalDateTime] {
+    override def wireType: WireType = LengthDelimited
+    override def protobufType: ProtobufType = "string"
+    override def write(out: Output, value: LocalDateTime): Unit = out.writeStringNoTag(value.toString)
+    override def read(in: CodedInputStream): LocalDateTime = LocalDateTime.parse(in.readString())
   }
 
   implicit def protobufOption[T](implicit T: Protobuf[T]): Protobuf[Option[T]] = new ProtobufOption(T)
